@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Factory.Controllers
 {
-  public class EngineersController : Controllers
+  public class EngineersController : Controller
   {
     private readonly FactoryContext _db;
     public EngineersController(FactoryContext db)
@@ -36,16 +36,16 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Engineer engineer, int MachineId)
+    public ActionResult Create(Engineer engineer, int machineId)
     {
       _db.Engineers.Add(engineer);
       _db.SaveChanges();
       #nullable enable
       EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
       #nullable disable
-      if (joinEntity == null && MachineId != 0)
+      if (joinEntity == null && machineId != 0)
       {
-        _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerName});
+        _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
         _db.SaveChanges();
       }
       return RedirectToAction("Index");
@@ -75,7 +75,7 @@ namespace Factory.Controllers
     public ActionResult Edit (int id)
     {
       Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
-      return View(thisMovie);
+      return View(thisEngineer);
     }
 
     [HttpPost]
