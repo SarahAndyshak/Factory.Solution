@@ -1,3 +1,9 @@
+body {
+  background-image: url('../img/bubbles.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 div#nav-links {
   text-align: center;
 }
@@ -7,7 +13,8 @@ div#footer {
 	bottom:0px;
 	left:0px;
 	width:100%;
-	color:#CCC;
-	background:#333;
+	color:white;
+	background:rgb(107, 89, 116);
+  opacity: 70%;
 	padding:8px;
 }
