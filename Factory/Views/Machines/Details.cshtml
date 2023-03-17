@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models
+@model Factory.Models.Machine
+
+<h2>Machine Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.MachineName): @Html.DisplayFor(model => model.MachineName)</h3>
+<h3>@Html.DisplayNameFor(model => model.MachineDetails): @Html.DisplayFor(model => model.MachineDetails)</h3> 
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>No engineers are assigned to work on this machine yet.</p>
+}
+else
+{
+  <h4>The following engieers are licensed to work on this machine:</h4>
+  <ul>
+    @foreach(EngineerMachine join in Model.JoinEntities)
+    {
+      <li>Engineer: @join.Engineer.EngineerName</li>
+      @using (Html.BeginForm("DeleteJoin", "Machines"))
+      {
+        @Html.Hidden("joinId", @join.EngineerMachineId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+}
+
+<br>
+<div id="nav-links">
+  <p>@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId }) | @Html.ActionLink("Add a Movie", "AddMovie", new { id = Model.MachineId }) | @Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId })</p>
+  <p>@Html.ActionLink("Back to List of Machines", "Index")</p>
+</div>
