@@ -32,26 +32,8 @@ namespace Factory.Controllers
     public ActionResult Create()
     {
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
-      //MachineName may need to be EngineerName
       return View();
     }
-
-//This version works, but won't add the machine when the Engineer is created -- needs argument for it
-    // [HttpPost]
-    // public ActionResult Create (Engineer engineer)
-    // {
-    //   if (!ModelState.IsValid)
-    //   {
-    //     ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
-    //     return View(engineer);
-    //   }
-    //   else
-    //   {
-    //     _db.Engineers.Add(engineer);
-    //     _db.SaveChanges();
-    //     return RedirectToAction("Index");
-    //   }
-    // }
 
     [HttpPost]
     public ActionResult Create (Engineer engineer, int machineId)
@@ -76,23 +58,6 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
       }
     }
-
-//This version adds the machine, but won't work with error handling. 
-    // [HttpPost]
-    // public ActionResult Create(Engineer engineer, int machineId)
-    // {
-    //   _db.Engineers.Add(engineer);
-    //   _db.SaveChanges();
-    //   #nullable enable
-    //   EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
-    //   #nullable disable
-    //   if (joinEntity == null && machineId != 0)
-    //   {
-    //     _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
-    //     _db.SaveChanges();
-    //   }
-    //   return RedirectToAction("Index");
-    // }
 
     public ActionResult AddMachine(int id)
     {

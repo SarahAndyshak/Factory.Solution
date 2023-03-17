@@ -1,0 +1,96 @@
+Notes on error handling:
+
+Easy fix for Machine: 
+- add in error messages on Machine.cs
+- in the MachineController, Create(), needed to add the if (!ModelState.IsValid) logic, then everything worked.
+    [HttpPost]
+    public ActionResult Create(Machine machine)
+    {
+      if (!ModelState.IsValid)
+      {
+        return View(machine);
+      }
+      else
+      {
+        _db.Machines.Add(machine);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+    }
+
+Harder fix for Engineer:
+
+First part of Create() remains the same for all variations:
+    public ActionResult Create()
+    {
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+      return View();
+    }
+
+- add error messages to Engineer.cs
+- original code (below) attaches machine to Engineer if one is available on creation of engineer entry, but wouldn't work with error handling.
+  //This version adds the machine, but won't work with error handling. 
+    // [HttpPost]
+    // public ActionResult Create(Engineer engineer, int machineId)
+    // {
+    //   _db.Engineers.Add(engineer);
+    //   _db.SaveChanges();
+    //   #nullable enable
+    //   EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
+    //   #nullable disable
+    //   if (joinEntity == null && machineId != 0)
+    //   {
+    //     _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
+    //     _db.SaveChanges();
+    //   }
+    //   return RedirectToAction("Index");
+    // }
+
+- version based on MachineController didn't have an argument for int machineId, so it worked with the error handling, but wouldn't attach available machines on creation of engineer entry.
+  //This version works, but won't add the machine when the Engineer is created -- needs argument for it
+    // [HttpPost]
+    // public ActionResult Create (Engineer engineer)
+    // {
+    //   if (!ModelState.IsValid)
+    //   {
+    //     ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+    //     return View(engineer);
+    //   }
+    //   else
+    //   {
+    //     _db.Engineers.Add(engineer);
+    //     _db.SaveChanges();
+    //     return RedirectToAction("Index");
+    //   }
+    // }
+
+- version currently in EngineersController incorporates argument for int machineId, but uses the longer code in the else statement to attach existing machines to engineer when the engineer entry is created. 
+      public ActionResult Create()
+    {
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create (Engineer engineer, int machineId)
+    {
+      if (!ModelState.IsValid)
+      {
+        ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+        return View(engineer);
+      }
+      else
+      {
+        _db.Engineers.Add(engineer);
+        _db.SaveChanges();
+        #nullable enable
+        EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
+        #nullable disable
+        if (joinEntity == null && machineId != 0)
+        {
+          _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
+          _db.SaveChanges();
+        }
+      return RedirectToAction("Index");
+      }
+    }
