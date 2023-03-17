@@ -1,4 +1,4 @@
-# Dr. Sillystringz's Fabulous Fabrications Factory
+# 💡 Dr. Sillystringz's Fabulous Fabrications Factory 💡
 
 #### By: Sarah Andyshak
 
@@ -53,7 +53,7 @@ A website for the factory to track machines in need of repair and engineers.
 
 ## Known Bugs
 
-No known bugs.
+🍀 As of 17 March 2023, no known bugs. 
 
 ## License
 Enjoy the site! If you have questions or suggestions for fixing the code, please contact me!
