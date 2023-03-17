@@ -4,8 +4,37 @@ body {
   background-repeat: no-repeat;
 }
 
+.jumbotron {
+  color: rgb(94, 71, 106);
+}
+
+div#main-body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: top 20px;
+  margin-left: 5%;
+  margin-right: 5%
+  
+}
+
+div#splash-text {
+  margin-left: 45%;
+}
+
+a {
+  color: rgb(94, 71, 106);
+}
+
+a:hover {
+  color: rgb(32, 125, 94);
+}
+
+li {
+  font-size: large;
+}
+
 div#nav-links {
   text-align: center;
+  font-size: large;
 }
 
 div#footer {

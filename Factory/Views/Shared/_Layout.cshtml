@@ -23,21 +23,25 @@
         <ul class="navbar-nav">
           
           <li class="nav-item active">
-            <a class="nav-link" href="/" style="color: green;">Home</a>
+            <h5><a class="nav-link" href="/" style="color: rgb(94, 71, 106);">Home</a></h5>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="/Engineers" style="color: green;" >Engineers</a>
+            <h5><a class="nav-link" href="/Engineers" style="color: rgb(94, 71, 106);" >Engineers</a></h5>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="/Machines" style="color: green;">Machines</a>
+            <h5><a class="nav-link" href="/Machines" style="color: rgb(94, 71, 106);">Machines</a></h5>
           </li>
 
         </ul>
       </div>
     </nav>
+
+    <div id="main-body">
     @RenderBody()
+    </div>
+
     @await Html.PartialAsync("Footer")
   </body>
 </html>

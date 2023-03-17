@@ -5,8 +5,10 @@
 @model Factory.Models.Engineer
 
 <h2>Edit</h2>
+<hr>
 
 <h4>Edit this engineer's information: @Html.DisplayFor(model => model.EngineerName)</h4>
+<br>
 
 @using (Html.BeginForm())
 {
@@ -20,8 +22,9 @@
 
     <input type="submit" value="Save" />
 }
-
 <br>
+
+<hr>
 <div id="nav-links">
   <p>@Html.ActionLink("Back to List of Engineers", "Index")</p>
 </div>

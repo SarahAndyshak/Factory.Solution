@@ -3,37 +3,40 @@
 }
 <div class="jumbotron text-center">
   <h1 class="display-4">Welcome to Dr. Sillystringz's Fabulous Fabrications Factory!</h1>
+  <h3>Home of incredible inventions since 2023</h3>
   <hr>
 </div>
 
-@using Factory.Models;
+<div id="splash-text">
+  @using Factory.Models;
 
-<h4>Engineers</h4>
-@if (Model["engineers"].Length == 0)
-{
-  <p>No engineers have been added to the roster yet</p>
-} 
-<ul>
-  @foreach (Engineer engineer in Model["engineers"])
+  <h4>Engineers</h4>
+  @if (Model["engineers"].Length == 0)
   {
-    <li>@Html.ActionLink(@engineer.EngineerName, "Details", "Engineers", new { id = @engineer.EngineerId})</li>
-  }
-</ul>
+    <p>No engineers have been added to the roster yet</p>
+  } 
+  <ul>
+    @foreach (Engineer engineer in Model["engineers"])
+    {
+      <li>@Html.ActionLink(@engineer.EngineerName, "Details", "Engineers", new { id = @engineer.EngineerId})</li>
+    }
+  </ul>
 
-<h4>Machines</h4>
-@if (Model["machines"].Length == 0)
-{
-  <p>No machines have been added to the factory yet</p>
-} 
-<ul>
-  @foreach (Machine machine in Model["machines"])
+  <h4>Machines</h4>
+  @if (Model["machines"].Length == 0)
   {
-    <li>@Html.ActionLink(@machine.MachineName, "Details", "Machines", new { id = @machine.MachineId})</li>
-  }
-</ul>
+    <p>No machines have been added to the factory yet</p>
+  } 
+  <ul>
+    @foreach (Machine machine in Model["machines"])
+    {
+      <li>@Html.ActionLink(@machine.MachineName, "Details", "Machines", new { id = @machine.MachineId})</li>
+    }
+  </ul>
+</div>
+<br>
 
 <hr>
 <div id="nav-links">
-<p>@Html.ActionLink("Manage engineers", "Index", "Engineers")</p> 
-<p>@Html.ActionLink("Manage machines", "Index", "Machines")</p>
+<p>@Html.ActionLink("Manage engineers", "Index", "Engineers") | @Html.ActionLink("Manage machines", "Index", "Machines")</p>
 </div>
