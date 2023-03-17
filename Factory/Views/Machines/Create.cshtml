@@ -6,6 +6,11 @@
 
 
 <h4>Add a new machine to the factory</h4>
+
+<p>@Html.ValidationMessageFor(model => model.MachineName, "", new { @class = "text-danger", @style = "font-weight: 600"})</p>
+
+<p>@Html.ValidationMessageFor(model => model.MachineDetails, "", new { @class = "text-danger", @style = "font-weight: 600"})</p>
+
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.MachineName)

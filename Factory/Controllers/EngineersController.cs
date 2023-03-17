@@ -30,7 +30,7 @@ namespace Factory.Controllers
     }
 
     public ActionResult Create()
-    {
+    {      
       ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
       return View();
     }
@@ -38,17 +38,19 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Engineer engineer, int machineId)
     {
-      _db.Engineers.Add(engineer);
-      _db.SaveChanges();
-      #nullable enable
-      EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
-      #nullable disable
-      if (joinEntity == null && machineId != 0)
-      {
-        _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
+
+        _db.Engineers.Add(engineer);
         _db.SaveChanges();
-      }
-      return RedirectToAction("Index");
+        #nullable enable
+        EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
+        #nullable disable
+        if (joinEntity == null && machineId != 0)
+        {
+          _db.EngineerMachines.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
+          _db.SaveChanges();
+        }
+        return RedirectToAction("Index");
+      
     }
 
     public ActionResult AddMachine(int id)
