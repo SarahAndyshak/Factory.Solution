@@ -60,4 +60,4 @@ Enjoy the site! If you have questions or suggestions for fixing the code, please
 
 [MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)
 
-Copyright (c) 2023 Owen Brown, Brishna Bakshev, Jackson Levine, Sarah Andyshak.
+Copyright (c) 2023 Sarah Andyshak.
