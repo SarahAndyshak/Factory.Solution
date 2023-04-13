@@ -15,6 +15,10 @@
 ## Description
 A website for the factory to track machines in need of repair and engineers.
 
+Screenshots from this project:
+![splash page](factorySplash.png)
+![machine details page](machineDetails.png)
+
 ### Setup Instructions
 
 #### You Will Need: 
@@ -46,7 +50,7 @@ A website for the factory to track machines in need of repair and engineers.
 #### Running the Project:
 1. Create a .gitignore file and add "appsettings.json", "bin", and "obj" to the ignored file list.  
 2. Open your shell (e.g., Terminal or GitBash) and add your .gitignore file and commit it before adding any other files. 
-3. Navigate to this project's production directory called "MovieRental". 
+3. Navigate to this project's production directory called "Factory". 
 4. In the command line, run the command `dotnet run` to compile and execute the console application. Optionally, you can run `dotnet build` to compile this console app without running it.
 5. Run `dotnet watch run` in the command line to start the project in development mode with a watcher.
 6. Open the browser to _https://localhost:5001_. If you cannot access localhost:5001 it is likely because you have not configured a .NET developer security certificate for HTTPS. To learn about this, review this lesson: [Redirecting to HTTPS and Issuing a Security Certificate](https://www.learnhowtoprogram.com/c-and-net/basic-web-applications/redirecting-to-https-and-issuing-a-security-certificate).
